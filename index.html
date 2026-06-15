@@ -185,6 +185,10 @@ Welcome to the<br>
 </div>
 </section>
 
+<div style="text-align:right;margin:24px 0">
+    <a class="btn join-link" id="joinBtn2" style="display:inline-block">+ Join the Ring</a>
+</div>
+
 <section class="members">
 <div class="member header">
 <div><strong>Name</strong></div>
@@ -248,10 +252,10 @@ const closeBtn = document.getElementById('closeModalBtn');
 const form = document.getElementById('joinForm');
 const status = document.getElementById('form-status');
 
-joinBtn.addEventListener('click', () => {
+[joinBtn, document.getElementById('joinBtn2')].forEach(btn => btn.addEventListener('click', () => {
     document.getElementById('year').value = new Date().getFullYear();
     modal.showModal();
-});
+}));
 closeBtn.addEventListener('click', () => { modal.close(); status.textContent = ''; document.getElementById('form-container').style.display = ''; form.reset(); });
 modal.addEventListener('click', e => { if (e.target === modal) { modal.close(); status.textContent = ''; document.getElementById('form-container').style.display = ''; form.reset(); } });
 
