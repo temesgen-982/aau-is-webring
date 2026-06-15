@@ -44,11 +44,7 @@ h1{
     margin:20px 0;
     flex-wrap:wrap;
 }
-.nav-buttons{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
+
 .btn{
     border:2px dotted #333;
     padding:12px;
@@ -140,7 +136,6 @@ dialog #form-status{
 .wrapper{grid-template-columns:1fr;}
 aside{display:none;}
 .member{grid-template-columns:1fr;}
-.nav-buttons{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -161,6 +156,11 @@ aside{display:none;}
 <li>Explore & Connect</li>
 </ol>
 </div>
+
+<div class="panel">
+<h3>EMBED WIDGET</h3>
+<p><span class="join-link" id="embedBtn">Get the embed code →</span></p>
+</div>
 </aside>
 
 <main>
@@ -178,10 +178,9 @@ Welcome to the<br>
 <div><strong id="website-count">0</strong><br>Websites</div>
 </div>
 
-<div class="nav-buttons">
-<a class="btn" href="#">← Previous Site</a>
-<a class="btn" href="#">🎲 Random Site</a>
-<a class="btn" href="#">Next Site →</a>
+<div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+<a class="btn" href="#" id="randomBtn" style="display:inline-block">🎲 Random Site</a>
+<a class="btn" href="https://en.wikipedia.org/wiki/Webring" target="_blank" rel="noopener" style="display:inline-block">What's a Webring?</a>
 </div>
 </section>
 
@@ -223,13 +222,23 @@ Welcome to the<br>
     </div>
     <div id="form-status"></div>
 </dialog>
+<dialog id="embedModal">
+    <h2>Embed Widget</h2>
+    <p>Add this snippet to your site's footer to show webring navigation:</p>
+    <pre style="background:#272822;color:#f8f8f2;padding:16px;overflow-x:auto;font-size:13px;border:2px dotted #333">&lt;div id="aau-is-webring"&gt;&lt;/div&gt;
+&lt;script src="https://temesgen-982.github.io/aau-is-2026-webring/embed.js"&gt;&lt;/script&gt;</pre>
+    <div class="form-actions">
+        <button type="button" id="closeEmbedBtn">Close</button>
+    </div>
+</dialog>
 <script>
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mojzreev';
 
+let sites = [];
 async function loadMembers() {
     try {
         const res = await fetch('./webring.json');
-        const sites = await res.json();
+        sites = await res.json();
         const container = document.getElementById('member-list');
         container.innerHTML = sites.map(site => `
             <div class="member">
@@ -245,6 +254,13 @@ async function loadMembers() {
     }
 }
 loadMembers();
+document.getElementById('randomBtn').addEventListener('click', e => {
+    e.preventDefault();
+    if (sites.length > 0) {
+        const random = sites[Math.floor(Math.random() * sites.length)];
+        window.open(random.url, '_blank');
+    }
+});
 
 const modal = document.getElementById('joinModal');
 const joinBtn = document.getElementById('joinBtn');
@@ -258,6 +274,11 @@ const status = document.getElementById('form-status');
 }));
 closeBtn.addEventListener('click', () => { modal.close(); status.textContent = ''; document.getElementById('form-container').style.display = ''; form.reset(); });
 modal.addEventListener('click', e => { if (e.target === modal) { modal.close(); status.textContent = ''; document.getElementById('form-container').style.display = ''; form.reset(); } });
+
+const embedModal = document.getElementById('embedModal');
+document.getElementById('embedBtn').addEventListener('click', () => embedModal.showModal());
+document.getElementById('closeEmbedBtn').addEventListener('click', () => embedModal.close());
+embedModal.addEventListener('click', e => { if (e.target === embedModal) embedModal.close(); });
 
 form.addEventListener('submit', async e => {
     e.preventDefault();
