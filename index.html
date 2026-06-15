@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAU Information Systems Class of 2026 Webring</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --dark: #1a1a1a;
+            --light: #f4f4f9;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 { color: var(--primary); margin-top: 0; }
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+        }
+        .directory {
+            margin-top: 30px;
+            padding: 0;
+            list-style: none;
+        }
+        .directory li {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .directory a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .code-box {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <span class="badge">Addis Ababa University</span>
+    <h1>Information Systems Class of 2026 Webring</h1>
+    <p>Welcome to our digital yearbook! This webring connects the personal websites, portfolios, and blogs of the 2026 Information Systems graduating batch. Let's stay connected as we enter the tech industry.</p>
+    
+    <h2>How to Join</h2>
+    <p>1. Copy the widget code below and paste it into your website's footer:</p>
+    <pre class="code-box">&lt;div id="aau-is-webring"&gt;&lt;/div&gt;
+&lt;script src="https://YOUR_GITHUB_USERNAME.github.io/aau-is-2026-webring/embed.js"&gt;&lt;/script&gt;</pre>
+    <p><i>(Note: Remember to change <b>YOUR_GITHUB_USERNAME</b> to your actual GitHub username in the script source!)</i></p>
+    <p>2. Submit a Pull Request modifying <code>webring.json</code> to add your name and website URL, or text the admin directly.</p>
+
+    <h2>Batch Directory</h2>
+    <ul id="directory-list" class="directory">
+        <!-- Loaded dynamically by JS -->
+    </ul>
+</div>
+
+<script>
+    // Configuration: Replace with your actual GitHub Pages URL path
+    const DATA_URL = './webring.json';
+
+    // Fetch and display the directory of students
+    async function loadDirectory() {
+        try {
+            const response = await fetch(DATA_URL);
+            const sites = await response.json();
+            const listContainer = document.getElementById('directory-list');
+            
+            listContainer.innerHTML = sites.map(site => `
+                <li>
+                    <span>${site.name}</span>
+                    <a href="${site.url}" target="_blank" rel="noopener">Visit Site →</a>
+                </li>
+            `).join('');
+        } catch (err) {
+            console.error("Failed to load webring directory", err);
+        }
+    }
+    loadDirectory();
+</script>
+
+</body>
+</html>
