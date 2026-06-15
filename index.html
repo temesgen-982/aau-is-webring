@@ -1,110 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAU Information Systems Webring</title>
-    <style>
-        :root {
-            --primary: #0066cc;
-            --dark: #1a1a1a;
-            --light: #f4f4f9;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
-            margin: 0;
-            padding: 40px 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        h1 { color: var(--primary); margin-top: 0; }
-        .badge {
-            background: var(--primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            display: inline-block;
-        }
-        .directory {
-            margin-top: 30px;
-            padding: 0;
-            list-style: none;
-        }
-        .directory li {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .directory a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .code-box {
-            background: #272822;
-            color: #f8f8f2;
-            padding: 15px;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-family: monospace;
-            font-size: 14px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IS Web Ring</title>
+<style>
+body{
+    background:#f7f4eb;
+    color:#111;
+    font-family:"Courier New", monospace;
+    margin:0;
+    padding:20px;
+}
+.wrapper{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:24px;
+}
+.panel{
+    border:2px dotted #333;
+    padding:16px;
+    margin-bottom:20px;
+    background:#faf8f1;
+}
+h1{
+    text-align:center;
+    font-size:clamp(2rem, 10vw, 4rem);
+    margin:.3em 0;
+    word-break:break-word;
+}
+.blue{color:#1f4cff;}
+.hero{
+    border:2px dotted #333;
+    padding:clamp(16px, 4vw, 24px);
+    text-align:center;
+}
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:clamp(16px, 4vw, 32px);
+    margin:20px 0;
+    flex-wrap:wrap;
+}
+.nav-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+.btn{
+    border:2px dotted #333;
+    padding:12px;
+    text-align:center;
+    text-decoration:none;
+    color:#1f4cff;
+}
+.members{
+    margin-top:24px;
+    border:2px dotted #333;
+    padding:clamp(12px, 3vw, 20px);
+}
+.member{
+    display:grid;
+    grid-template-columns:1fr 80px 120px;
+    padding:12px 0;
+    border-bottom:1px dotted #999;
+    gap:8px;
+}
+.member.header{
+    padding-bottom:8px;
+}
+a{color:#1f4cff;}
+.footer{
+    text-align:center;
+    margin-top:30px;
+}
+aside{display:block;}
+.join-link{cursor:pointer;color:#1f4cff;text-decoration:underline;}
+.join-link:hover{opacity:.7;}
+dialog{
+    border:2px dotted #333;
+    border-radius:0;
+    padding:24px;
+    max-width:480px;
+    width:90vw;
+    background:#faf8f1;
+    font-family:"Courier New",monospace;
+}
+dialog::backdrop{
+    background:rgba(0,0,0,.6);
+}
+dialog h2{margin-top:0;}
+dialog form{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+dialog label{font-weight:bold;font-size:14px;}
+dialog input{
+    font-family:"Courier New",monospace;
+    border:2px dotted #333;
+    padding:10px;
+    background:#fff;
+    font-size:14px;
+}
+dialog input:focus{
+    outline:2px solid #1f4cff;
+    outline-offset:2px;
+}
+dialog .form-actions{
+    display:flex;
+    gap:12px;
+    justify-content:flex-end;
+    margin-top:4px;
+}
+dialog .form-actions button{
+    font-family:"Courier New",monospace;
+    border:2px dotted #333;
+    padding:10px 20px;
+    cursor:pointer;
+    background:#fff;
+    font-size:14px;
+}
+dialog .form-actions button[type="submit"]{
+    background:#1f4cff;
+    color:#fff;
+    border-color:#1f4cff;
+}
+dialog .form-actions button[type="submit"]:hover{
+    opacity:.85;
+}
+dialog #form-status{
+    text-align:center;
+    padding:8px;
+    font-weight:bold;
+}
+@media(max-width:800px){
+.wrapper{grid-template-columns:1fr;}
+aside{display:none;}
+.member{grid-template-columns:1fr;}
+.nav-buttons{grid-template-columns:1fr;}
+}
+</style>
 </head>
 <body>
+<div class="wrapper">
 
-<div class="container">
-    <span class="badge">Addis Ababa University</span>
-    <h1>Information Systems Webring</h1>
-    <p>Welcome to our digital yearbook! This webring connects the personal websites, portfolios, and blogs of Information Systems students and alumni. Let's stay connected as we enter the tech industry.</p>
-    
-    <h2>How to Join</h2>
-    <p>1. Copy the widget code below and paste it into your website's footer:</p>
-    <pre class="code-box">&lt;div id="aau-is-webring"&gt;&lt;/div&gt;
-&lt;script src="https://temesgen-982.github.io/aau-is-2026-webring/embed.js"&gt;&lt;/script&gt;</pre>
-    <p>2. Submit a Pull Request modifying <code>webring.json</code> to add your name and website URL, or text the admin directly.</p>
-
-    <h2>Batch Directory</h2>
-    <ul id="directory-list" class="directory">
-        <!-- Loaded dynamically by JS -->
-    </ul>
+<aside>
+<div class="panel">
+<h3>ABOUT THIS RING</h3>
+<p>A student-led web ring connecting Information Systems students through personal websites, blogs, and portfolios.</p>
 </div>
 
+<div class="panel">
+<h3>HOW IT WORKS</h3>
+<ol>
+<li><span class="join-link" id="joinBtn">Join the Ring</span></li>
+<li>Get Listed</li>
+<li>Explore & Connect</li>
+</ol>
+</div>
+</aside>
+
+<main>
+<section class="hero">
+<div>★ ✦ ★ ✦ ★</div>
+<h1>
+Welcome to the<br>
+<span class="blue">Information Systems<br>Web Ring</span>
+</h1>
+
+<p>A collection of personal websites, blogs, and portfolios built by Information Systems students.</p>
+
+<div class="stats" id="stats">
+<div><strong id="student-count">0</strong><br>Students</div>
+<div><strong id="website-count">0</strong><br>Websites</div>
+</div>
+
+<div class="nav-buttons">
+<a class="btn" href="#">← Previous Site</a>
+<a class="btn" href="#">🎲 Random Site</a>
+<a class="btn" href="#">Next Site →</a>
+</div>
+</section>
+
+<section class="members">
+<div class="member header">
+<div><strong>Name</strong></div>
+<div><strong>Year</strong></div>
+<div><strong>URL</strong></div>
+</div>
+<div id="member-list"></div>
+</section>
+
+<div class="footer">
+<p>Information Systems Web Ring © 2026</p>
+<p>Keep the web awesome.</p>
+</div>
+
+</main>
+</div>
+<dialog id="joinModal">
+    <div id="form-container">
+        <h2>Join the Ring</h2>
+        <p>Add your site to the webring. We'll review your submission and add you to the directory.</p>
+        <form id="joinForm" action="https://formspree.io/f/mojzreev" method="POST">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required>
+<input type="hidden" id="year" name="year">
+            <label for="url">Website URL *</label>
+            <input type="url" id="url" name="url" placeholder="https://" required>
+            <div class="form-actions">
+                <button type="button" id="closeModalBtn">Cancel</button>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div id="form-status"></div>
+</dialog>
 <script>
-    // Configuration: Replace with your actual GitHub Pages URL path
-    const DATA_URL = './webring.json';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mojzreev';
 
-    // Fetch and display the directory of students
-    async function loadDirectory() {
-        try {
-            const response = await fetch(DATA_URL);
-            const sites = await response.json();
-            const listContainer = document.getElementById('directory-list');
-            
-            listContainer.innerHTML = sites.map(site => `
-                <li>
-                    <span>${site.name}</span>
-                    <a href="${site.url}" target="_blank" rel="noopener">Visit Site →</a>
-                </li>
-            `).join('');
-        } catch (err) {
-            console.error("Failed to load webring directory", err);
-        }
+async function loadMembers() {
+    try {
+        const res = await fetch('./webring.json');
+        const sites = await res.json();
+        const container = document.getElementById('member-list');
+        container.innerHTML = sites.map(site => `
+            <div class="member">
+                <div>${site.name}</div>
+                <div>${site.year}</div>
+                <div><a href="${site.url}" target="_blank" rel="noopener">Visit Site</a></div>
+            </div>
+        `).join('');
+        document.getElementById('student-count').textContent = sites.length;
+        document.getElementById('website-count').textContent = new Set(sites.map(s => s.url)).size;
+    } catch (err) {
+        console.error('Failed to load members', err);
     }
-    loadDirectory();
-</script>
+}
+loadMembers();
 
+const modal = document.getElementById('joinModal');
+const joinBtn = document.getElementById('joinBtn');
+const closeBtn = document.getElementById('closeModalBtn');
+const form = document.getElementById('joinForm');
+const status = document.getElementById('form-status');
+
+joinBtn.addEventListener('click', () => {
+    document.getElementById('year').value = new Date().getFullYear();
+    modal.showModal();
+});
+closeBtn.addEventListener('click', () => { modal.close(); status.textContent = ''; document.getElementById('form-container').style.display = ''; form.reset(); });
+modal.addEventListener('click', e => { if (e.target === modal) { modal.close(); status.textContent = ''; document.getElementById('form-container').style.display = ''; form.reset(); } });
+
+form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    status.textContent = 'Submitting…';
+    try {
+        const res = await fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+        if (res.ok) {
+            status.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1f4cff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 12px"><path d="M20 6L9 17l-5-5"/></svg>Thanks! We\'ll review your submission as soon as possible.';
+            document.getElementById('form-container').style.display = 'none';
+        } else {
+            status.textContent = 'Something went wrong. Try again.';
+        }
+    } catch {
+        status.textContent = 'Network error. Please try again.';
+    }
+});
+</script>
 </body>
 </html>

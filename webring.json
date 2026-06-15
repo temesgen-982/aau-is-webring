@@ -1,10 +1,12 @@
 [
   {
     "name": "Temesgen Adane",
+    "year": "2026",
     "url": "https://temesgen.vercel.app"
   },
   {
     "name": "Example Website",
+    "year": "2025",
     "url": "https://example.com"
-  },
+  }
 ]
